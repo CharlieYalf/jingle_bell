@@ -8,11 +8,26 @@
 }
 
 #player {
-    width: 30px;
-    height: 30px;
-    background-color: #FF0000;
+    width: 40px;
+    height: 40px;
+    background-color: #4A90E2;
     position: absolute;
     transition: all 0.3s ease;
+    border-radius: 50%;
+    /* Remove previous transition to add new properties */
+    transition: all 0.3s ease;
+}
+
+#player::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 25px solid #FF6B6B;
+    right: -20px;
+    top: 5px;
 }
 
 .platform {

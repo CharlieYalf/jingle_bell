@@ -4,7 +4,7 @@ class Game {
         this.platformsContainer = document.getElementById('platforms');
         this.scoreElement = document.getElementById('score');
         this.score = 0;
-        this.playerPosition = { x: 370, y: 550 };
+        this.playerPosition = { x: 370, y: 530 };
         this.facingRight = true;
         this.platforms = [];
         this.currentPlatformIndex = 0;
@@ -64,7 +64,8 @@ class Game {
     updatePlayerPosition() {
         this.player.style.left = `${this.playerPosition.x}px`;
         this.player.style.top = `${this.playerPosition.y}px`;
-        this.player.style.transform = this.facingRight ? 'scaleX(1)' : 'scaleX(-1)';
+        // Update rotation instead of scale
+        this.player.style.transform = this.facingRight ? 'rotate(0deg)' : 'rotate(180deg)';
     }
 
     jump(turn) {
@@ -80,7 +81,7 @@ class Game {
 
         if (isCorrectDirection) {
             this.playerPosition.x = nextPlatform.x;
-            this.playerPosition.y = nextPlatform.y - 30;
+            this.playerPosition.y = nextPlatform.y - 40;
             this.currentPlatformIndex++;
             this.score++;
             this.scoreElement.textContent = this.score;
