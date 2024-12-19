@@ -10,7 +10,8 @@ body {
 }
 
 .game-container {
-    width: 800px;
+    width: 95%;
+    max-width: 800px;
     height: 600px;
     margin: 0 auto;
     position: relative;
@@ -71,7 +72,8 @@ body {
     font-size: 24px;
     margin: 20px auto;
     padding: 20px;
-    max-width: 600px;
+    width: 95%;
+    max-width: 800px;
     background: rgba(196, 30, 58, 0.8);  /* Semi-transparent red */
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(255,255,255,0.1);
@@ -108,4 +110,63 @@ h1 {
     animation: snowfall 20s linear infinite;
     opacity: 0.3;
     pointer-events: none;
+} 
+
+@media (max-width: 850px) {
+    .game-container {
+        height: 400px;
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 32px;
+        margin: 10px 0;
+    }
+
+    .instructions {
+        font-size: 18px;
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    .score {
+        font-size: 24px;
+        margin: 10px;
+    }
+
+    #player {
+        width: 30px;
+        height: 30px;
+    }
+
+    #player::after {
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 20px solid #ffffff;
+        right: -15px;
+        top: 5px;
+    }
+
+    .platform {
+        width: 50px;
+        height: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        height: 300px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .instructions {
+        font-size: 16px;
+        padding: 10px;
+    }
 } 

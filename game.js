@@ -4,7 +4,10 @@ class Game {
         this.platformsContainer = document.getElementById('platforms');
         this.scoreElement = document.getElementById('score');
         this.score = 0;
-        this.playerPosition = { x: 370, y: 530 };
+        this.playerPosition = {
+            x: window.innerWidth <= 850 ? 270 : 370,
+            y: window.innerWidth <= 850 ? 330 : 530
+        };
         this.facingRight = true;
         this.platforms = [];
         this.currentPlatformIndex = 0;
@@ -15,8 +18,23 @@ class Game {
             y: this.gameContainer.offsetHeight / 2
         };
 
+        this.platformGap = window.innerWidth <= 850 ? 80 : 120;
+        this.platformHeight = window.innerWidth <= 850 ? 70 : 100;
+
         this.initializeVoiceRecognition();
         this.createInitialPlatform();
+        this.updatePlayerPosition();
+
+        window.addEventListener('resize', this.handleResize.bind(this));
+    }
+
+    handleResize() {
+        this.platformGap = window.innerWidth <= 850 ? 80 : 120;
+        this.platformHeight = window.innerWidth <= 850 ? 70 : 100;
+        this.cameraOffset = {
+            x: this.gameContainer.offsetWidth / 2,
+            y: this.gameContainer.offsetHeight / 2
+        };
         this.updatePlayerPosition();
     }
 
@@ -59,9 +77,9 @@ class Game {
 
     generateNextPlatform() {
         const lastPlatform = this.platforms[this.platforms.length - 1];
-        const direction = Math.random() < 0.5 ? -1 : 1;
-        const x = lastPlatform.x + (direction * 120);
-        const y = lastPlatform.y - 100;
+        const direction = Math.random() < 0.28 ? -1 : 1;
+        const x = lastPlatform.x + (direction * this.platformGap);
+        const y = lastPlatform.y - this.platformHeight;
         
         const platform = this.createPlatform(x, y);
         this.platforms.push(platform);
@@ -69,6 +87,7 @@ class Game {
         if (this.platforms.length > 10) {
             const oldPlatform = this.platforms.shift();
             oldPlatform.element.remove();
+            this.currentPlatformIndex--;
         }
     }
 
@@ -90,6 +109,11 @@ class Game {
         const nextPlatform = this.platforms[this.currentPlatformIndex + 1];
         const currentPlatform = this.platforms[this.currentPlatformIndex];
         
+        if (!nextPlatform) {
+            this.gameOver();
+            return;
+        }
+
         if (turn) {
             this.facingRight = !this.facingRight;
         }
