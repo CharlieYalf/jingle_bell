@@ -1,0 +1,35 @@
+.game-container {
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #87CEEB;
+    overflow: hidden;
+}
+
+#player {
+    width: 30px;
+    height: 30px;
+    background-color: #FF0000;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.platform {
+    width: 60px;
+    height: 20px;
+    background-color: #4CAF50;
+    position: absolute;
+}
+
+.score {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px;
+}
+
+.instructions {
+    text-align: center;
+    font-size: 18px;
+    margin: 20px;
+} 
