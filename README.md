@@ -9,4 +9,4 @@ A voice-controlled Christmas platformer game. Say "jingle" to jump forward and "
 4. Follow the magical stairs but be careful - one wrong step and you'll fall!
 
 ## Play Now
-[Play Jingle Bell Stairs](https://charlieyalf.github.io/jingle_bell) 
+[Play Jingle Bell Stairs](https://charlieyalf.github.io/jingle_bell/) 
