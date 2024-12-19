@@ -7,6 +7,11 @@
     overflow: hidden;
 }
 
+.game-world {
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
 #player {
     width: 40px;
     height: 40px;

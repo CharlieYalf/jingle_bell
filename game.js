@@ -8,6 +8,12 @@ class Game {
         this.facingRight = true;
         this.platforms = [];
         this.currentPlatformIndex = 0;
+        this.gameWorld = document.querySelector('.game-world');
+        this.gameContainer = document.querySelector('.game-container');
+        this.cameraOffset = {
+            x: this.gameContainer.offsetWidth / 2,
+            y: this.gameContainer.offsetHeight / 2
+        };
 
         this.initializeVoiceRecognition();
         this.createInitialPlatform();
@@ -54,18 +60,30 @@ class Game {
     generateNextPlatform() {
         const lastPlatform = this.platforms[this.platforms.length - 1];
         const direction = Math.random() < 0.5 ? -1 : 1;
-        const x = lastPlatform.x + (direction * 100);
+        const x = lastPlatform.x + (direction * 120);
         const y = lastPlatform.y - 100;
         
         const platform = this.createPlatform(x, y);
         this.platforms.push(platform);
+
+        if (this.platforms.length > 10) {
+            const oldPlatform = this.platforms.shift();
+            oldPlatform.element.remove();
+        }
     }
 
     updatePlayerPosition() {
         this.player.style.left = `${this.playerPosition.x}px`;
         this.player.style.top = `${this.playerPosition.y}px`;
-        // Update rotation instead of scale
         this.player.style.transform = this.facingRight ? 'rotate(0deg)' : 'rotate(180deg)';
+        this.updateCamera();
+    }
+
+    updateCamera() {
+        const targetX = -this.playerPosition.x + this.cameraOffset.x;
+        const targetY = -this.playerPosition.y + this.cameraOffset.y;
+        
+        this.gameWorld.style.transform = `translate(${targetX}px, ${targetY}px)`;
     }
 
     jump(turn) {
